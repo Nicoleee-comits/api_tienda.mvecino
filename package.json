@@ -2,10 +2,10 @@
   "name": "api_mi.vecino",
   "version": "1.0.0",
   "description": "API para Tienda Mi Vecino con PostgreSQL",
-  "main": "src/app.js",
+  "main": "src/index.js",
  
   "scripts": {
-    "dev": "nodemon src/app.js",
+    "dev": "nodemon src/index.js",
     "db:migrate": "npx sequelize-cli db:migrate"
   },
   "dependencies": {
