@@ -20,7 +20,7 @@ app.use(express.json()); // convierte JSON entrante en objeto JS (req.body)
 
 // 4. RUTA DE BIENVENIDA
 app.get('/api', (req, res) => {
-  res.send('🌟 Bienvenido al API de Tienda Mi Vecino 🌟');
+  res.send(' Bienvenido al API de Tienda Mi Vecino ');
 });
 
 // 5. MONTAR LAS RUTAS PRINCIPALES
