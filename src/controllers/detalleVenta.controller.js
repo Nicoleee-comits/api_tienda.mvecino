@@ -21,12 +21,12 @@ const getAllDetalles = async (req, res) => {
       include: [
         {
           model: Producto,
-          as: 'producto', // 👈 usa el mismo alias del modelo
+          as: 'producto', // 
           attributes: ['id', 'nombre', 'precio']
         },
         {
           model: Venta,
-          as: 'venta', // 👈 también el alias correcto para la venta
+          as: 'venta', // 
           attributes: ['id', 'fecha', 'total']
         }
       ]
