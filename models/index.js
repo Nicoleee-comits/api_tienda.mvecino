@@ -37,6 +37,17 @@ Object.keys(db).forEach(modelName => {
   }
 });
 
+//  agregas tus relaciones 
+db.Venta.belongsTo(db.Usuario, { foreignKey: 'id_usuario', as: 'usuario' });
+db.Usuario.hasMany(db.Venta, { foreignKey: 'id_usuario', as: 'ventas' });
+
+db.DetalleVenta.belongsTo(db.Venta, { foreignKey: 'id_venta', as: 'venta' });
+db.Venta.hasMany(db.DetalleVenta, { foreignKey: 'id_venta', as: 'detalles' });
+
+db.DetalleVenta.belongsTo(db.Producto, { foreignKey: 'id_producto', as: 'producto' });
+db.Producto.hasMany(db.DetalleVenta, { foreignKey: 'id_producto', as: 'detalles' });
+// Fin de las relaciones
+
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 

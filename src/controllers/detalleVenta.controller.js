@@ -18,13 +18,28 @@ const createDetalleVenta = async (req, res) => {
 const getAllDetalles = async (req, res) => {
   try {
     const detalles = await DetalleVenta.findAll({
-      include: [Producto, Venta],
+      include: [
+        {
+          model: Producto,
+          as: 'producto', // 👈 usa el mismo alias del modelo
+          attributes: ['id', 'nombre', 'precio']
+        },
+        {
+          model: Venta,
+          as: 'venta', // 👈 también el alias correcto para la venta
+          attributes: ['id', 'fecha', 'total']
+        }
+      ]
     });
     res.status(200).json(detalles);
   } catch (error) {
-    res.status(500).json({ message: 'Error al obtener los detalles', error: error.message });
+    res.status(500).json({
+      message: 'Error al obtener los detalles',
+      error: error.message
+    });
   }
 };
+
 
 // OBTENER detalle por ID
 const getDetalleById = async (req, res) => {

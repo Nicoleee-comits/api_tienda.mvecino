@@ -1,5 +1,5 @@
 // Archivo: src/controllers/venta.controller.js
-const { Venta, Usuario, DetalleVenta } = require('../../models');
+const { Venta, Usuario, DetalleVenta,Producto } = require('../../models');
 
 // CREAR venta
 const createVenta = async (req, res) => {
@@ -15,16 +15,39 @@ const createVenta = async (req, res) => {
 };
 
 // OBTENER todas las ventas
+// OBTENER todas las ventas
 const getAllVentas = async (req, res) => {
   try {
     const ventas = await Venta.findAll({
-      include: [Usuario, DetalleVenta],
+      include: [
+        {
+          model: Usuario,
+          as: 'usuario',
+          attributes: ['id', 'nombre', 'email']
+        },
+        {
+          model: DetalleVenta,
+          as: 'detalles',
+          include: [
+            {
+              model: Producto,
+              as: 'producto',
+              attributes: ['id', 'nombre', 'precio']
+            }
+          ]
+        }
+      ]
     });
+
     res.status(200).json(ventas);
   } catch (error) {
-    res.status(500).json({ message: 'Error al obtener las ventas', error: error.message });
+    res.status(500).json({
+      message: 'Error al obtener las ventas',
+      error: error.message
+    });
   }
 };
+
 
 // OBTENER venta por ID
 const getVentaById = async (req, res) => {
